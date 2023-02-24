@@ -12,6 +12,7 @@
     "@date-io/moment": "^1.0.0",
     "@material-ui/core": "^3.0.1",
     "@material-ui/icons": "^3.0.1",
+    "firebase": "^9.17.1",
     "json2csv": "^4.2.1",
     "material-ui-pickers": "^2.1.2",
     "moment": "^2.22.2",

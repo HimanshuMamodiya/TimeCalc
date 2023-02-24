@@ -9,7 +9,7 @@ import {
   TableHead,
   TableFooter,
   TableRow,
-  withStyles
+  withStyles,
 } from "@material-ui/core";
 
 import Moment from "moment";
@@ -20,18 +20,19 @@ import { connect } from "react-redux";
 import {
   clearTimes,
   downloadTimes,
-  loadTimes
+  loadTimes,
 } from "../../connectors/redux/actions";
 
 import withDialog from "../Dialog/Dialog";
 import Button from "../Button/Button";
 import Timeset from "../Timeset/Timeset";
+import { CloudDownload } from "@material-ui/icons";
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: "100%",
     marginTop: theme.spacing.unit * 3,
-    overflowX: "auto"
+    overflowX: "auto",
   },
   important: {
     // fontWeight: 'bold',
@@ -39,16 +40,16 @@ const styles = theme => ({
 
   hideMobile: {
     [theme.breakpoints.down("xs")]: {
-      display: "none !important"
-    }
-  }
+      display: "none !important",
+    },
+  },
 });
 
 export class TimeList extends React.PureComponent {
   static defaultProps = {
     times: {},
     deleteAllTitle: "Delete all TimeRecords?",
-    deleteAllHelp: "Do you really want to wipe out all Data?"
+    deleteAllHelp: "Do you really want to wipe out all Data?",
   };
 
   static propTypes = {
@@ -58,7 +59,7 @@ export class TimeList extends React.PureComponent {
     download: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
     deleteAllHelp: PropTypes.string,
-    deleteAllTitle: PropTypes.string
+    deleteAllTitle: PropTypes.string,
   };
 
   constructor(props) {
@@ -73,7 +74,7 @@ export class TimeList extends React.PureComponent {
 
   calculateSum() {
     const durationSum = Moment.duration("00:00");
-    this.props.times.map(t => durationSum.add(t.duration));
+    this.props.times.map((t) => durationSum.add(t.duration));
     return durationSum.format("HH:mm", { trim: false });
   }
 
@@ -90,6 +91,11 @@ export class TimeList extends React.PureComponent {
         <Table className={classes.table} id="times">
           <TableHead>
             <TableRow>
+              {localStorage.getItem("role") != "emp" ? (
+                <TableCell className={classes.important}>Employee</TableCell>
+              ) : (
+                <></>
+              )}
               <TableCell className={classes.important}>Day</TableCell>
               <TableCell className={classes.hideMobile}>Description</TableCell>
               <TableCell className={classes.hideMobile} align="right">
@@ -98,36 +104,33 @@ export class TimeList extends React.PureComponent {
               <TableCell className={classes.hideMobile} align="right">
                 End
               </TableCell>
-              <TableCell className={classes.hideMobile} align="right">
-                Break
-              </TableCell>
-              <TableCell className={classes.important} align="right">
-                Duration
+              <TableCell className={classes.important} align={"center"}>
+                Status
               </TableCell>
               <TableCell>
-                <Button
-                  invoke={() => this.props.download(this.props.times)}
-                  label="Download"
-                  icon="cloud_download"
-                />
-                <Button
-                  color="secondary"
-                  invoke={() =>
-                    this.props.toggleDialog(
-                      this.props.times,
-                      this.props.deleteAllTitle,
-                      this.props.deleteAllHelp
-                    )
-                  }
-                  label="Delete"
-                  icon="delete"
-                />
+                {/*<Button*/}
+                {/*  invoke={() => this.props.download(this.props.times)}*/}
+                {/*  label="Download"*/}
+                {/*  icon={<CloudDownload/>}*/}
+                {/*/>*/}
+                {/*<Button*/}
+                {/*  color="secondary"*/}
+                {/*  invoke={() =>*/}
+                {/*    this.props.toggleDialog(*/}
+                {/*      this.props.times,*/}
+                {/*      this.props.deleteAllTitle,*/}
+                {/*      this.props.deleteAllHelp*/}
+                {/*    )*/}
+                {/*  }*/}
+                {/*  label="Delete"*/}
+                {/*  icon={<Delete/>}*/}
+                {/*/>*/}
               </TableCell>
             </TableRow>
           </TableHead>
 
           <TableBody>
-            {Object.keys(this.props.times).map(k => (
+            {Object.keys(this.props.times).map((k) => (
               <Timeset
                 key={k}
                 time={this.props.times[k]}
@@ -135,19 +138,19 @@ export class TimeList extends React.PureComponent {
               />
             ))}
           </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell />
-              <TableCell className={classes.hideMobile} />
-              <TableCell className={classes.hideMobile} />
-              <TableCell className={classes.hideMobile} />
-              <TableCell className={classes.hideMobile} />
-              <TableCell className={classes.important} align="right">
-                {sum}
-              </TableCell>
-              <TableCell className={classes.hideMobile} />
-            </TableRow>
-          </TableFooter>
+          {/*<TableFooter>*/}
+          {/*  <TableRow>*/}
+          {/*    <TableCell />*/}
+          {/*    <TableCell className={classes.hideMobile} />*/}
+          {/*    <TableCell className={classes.hideMobile} />*/}
+          {/*    <TableCell className={classes.hideMobile} />*/}
+          {/*    <TableCell className={classes.hideMobile} />*/}
+          {/*    <TableCell className={classes.important} align="right">*/}
+          {/*      {sum}*/}
+          {/*    </TableCell>*/}
+          {/*    <TableCell className={classes.hideMobile} />*/}
+          {/*  </TableRow>*/}
+          {/*</TableFooter>*/}
         </Table>
       </Paper>
     );
@@ -156,15 +159,15 @@ export class TimeList extends React.PureComponent {
 
 export const StyledTimeList = withStyles(styles)(TimeList);
 
-const mapStateToProps = state => ({
-    times: state.timelist.times
-  });
+const mapStateToProps = (state) => ({
+  times: state.timelist.times,
+});
 
-const mapDispatchToProps = dispatch => ({
-    load: () => dispatch(loadTimes()),
-    onOk: () => dispatch(clearTimes()),
-    download: times => dispatch(downloadTimes(times))
-  });
+const mapDispatchToProps = (dispatch) => ({
+  load: () => dispatch(loadTimes()),
+  onOk: () => dispatch(clearTimes()),
+  download: (times) => dispatch(downloadTimes(times)),
+});
 
 export default connect(
   mapStateToProps,

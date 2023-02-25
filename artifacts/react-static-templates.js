@@ -1,19 +1,7 @@
 
-import universal, { setHasBabelPlugin } from 'D:/Firebase/time-calc/node_modules/react-static/node_modules/react-universal-component/dist/index.js'
 
 
-setHasBabelPlugin()
-
-const universalOptions = {
-  loading: () => null,
-  error: props => {
-    console.error(props.error);
-    return <div>An error occurred loading this page's template. More information is available in the console.</div>;
-  },
-}
-
-const t_0 = universal(import('../node_modules/react-static/lib/browser/components/Default404'), universalOptions)
-
+import t_0 from '../node_modules/react-static/lib/browser/components/Default404'
 
 // Template Map
 export default {

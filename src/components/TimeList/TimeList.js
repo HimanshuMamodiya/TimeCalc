@@ -28,6 +28,11 @@ import Button from "../Button/Button";
 import Timeset from "../Timeset/Timeset";
 import { CloudDownload } from "@material-ui/icons";
 
+const isAdmin = () => {
+  let user = JSON.parse(localStorage.getItem("user"));
+  console.log(user.uid);
+  if (user != null && user?.email == "admin@tsm.com") return true;
+};
 const styles = (theme) => ({
   root: {
     width: "100%",
@@ -91,7 +96,7 @@ export class TimeList extends React.PureComponent {
         <Table className={classes.table} id="times">
           <TableHead>
             <TableRow>
-              {localStorage.getItem("role") != "emp" ? (
+              {isAdmin() ? (
                 <TableCell className={classes.important}>Employee</TableCell>
               ) : (
                 <></>

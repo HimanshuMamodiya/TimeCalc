@@ -4,6 +4,8 @@ import Helmet from "react-helmet";
 import universal from "react-universal-component";
 
 import { withSiteData } from "react-static";
+import { auth } from "./firebase";
+import { Button } from "@material-ui/core";
 
 import {
   Grid,
@@ -33,7 +35,43 @@ const Failed = (context) =>
   );
 
 const Loading = () => <LinearProgress />;
+const Login = universal(import("./components/Login/Login"), {});
 
+const SignUp = universal(import("./components/Signup/Signup"), {});
+const showLogin = () => {
+  if (
+    typeof localStorage !== "undefined" &&
+    localStorage.getItem("user") == null &&
+    (global.window.location.pathname === "/login" ||
+      global.window.location.pathname === "/")
+  ) {
+    return <Login />;
+  }
+};
+
+const showSignup = () => {
+  if (
+    typeof localStorage !== "undefined" &&
+    localStorage.getItem("user") == null &&
+    global.window.location.pathname === "/signup"
+  ) {
+    return <SignUp />;
+  }
+};
+
+const showHome = () => {
+  if (
+    typeof localStorage !== "undefined" &&
+    localStorage.getItem("user") != null
+  )
+    return true;
+};
+
+const isAdmin = () => {
+  let user = JSON.parse(localStorage.getItem("user"));
+  console.log(user.uid);
+  if (user != null && user?.email == "admin@tsm.com") return true;
+};
 const Form = universal(import("./components/Form/Form"), {
   loading: Loading,
   error: Failed,
@@ -47,6 +85,9 @@ const TimeList = universal(import("./components/TimeList/TimeList"), {
 const styles = () => ({
   root: {
     flexGrow: 1,
+  },
+  padding_left: {
+    paddingLeft: "80%",
   },
 });
 
@@ -88,9 +129,28 @@ if ('serviceWorker' in navigator) {
             <Typography variant="h6" color="inherit">
               {title}
             </Typography>
+            {showHome() && (
+              <Typography
+                className={classes.padding_left}
+                variant="h6"
+                color="inherit"
+              >
+                <Button
+                  onClick={() => {
+                    auth.signOut();
+                    window.localStorage.removeItem("user");
+                    global.window.location.reload(false);
+                  }}
+                >
+                  Sign Out
+                </Button>
+              </Typography>
+            )}
           </Toolbar>
         </AppBar>
-        {localStorage.getItem("role") == "emp" ? (
+        {showLogin()}
+        {showSignup()}
+        {showHome() && !isAdmin() ? (
           <Grid item xs={12}>
             <MuiPickersUtilsProvider utils={MomentUtils}>
               <Form />
@@ -99,9 +159,13 @@ if ('serviceWorker' in navigator) {
         ) : (
           <></>
         )}
-        <Grid item xs={12}>
-          <TimeList />
-        </Grid>
+        {showHome() ? (
+          <Grid item xs={12}>
+            <TimeList />
+          </Grid>
+        ) : (
+          <></>
+        )}
       </Grid>
     </MuiThemeProvider>
   </Provider>

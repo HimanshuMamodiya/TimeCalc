@@ -3,12 +3,12 @@
 
 // Plugins
 const plugins = [{
-  location: "D:/Firebase/time-calc/node_modules/react-static-plugin-jss",
+  location: "D:/Firebase/TimeCalc/node_modules/react-static-plugin-jss",
   plugins: [],
   hooks: {}
 },
 {
-  location: "D:/Firebase/time-calc",
+  location: "D:/Firebase/TimeCalc",
   plugins: [],
   hooks: {}
 }]

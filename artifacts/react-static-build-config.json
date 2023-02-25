@@ -1,5 +1,5 @@
 {
-  "entry": "D:\\Firebase\\time-calc\\src\\index.js",
+  "entry": "D:\\Firebase\\TimeCalc\\src\\index.js",
   "prefetchRate": 5,
   "maxThreads": null,
   "disableRoutePrefixing": false,
@@ -15,36 +15,36 @@
   "extractCssChunks": true,
   "plugins": [
     {
-      "location": "D:\\Firebase\\time-calc\\node_modules\\react-static-plugin-jss",
-      "nodeLocation": "D:\\Firebase\\time-calc\\node_modules\\react-static-plugin-jss\\node.api.js",
+      "location": "D:\\Firebase\\TimeCalc\\node_modules\\react-static-plugin-jss",
+      "nodeLocation": "D:\\Firebase\\TimeCalc\\node_modules\\react-static-plugin-jss\\node.api.js",
       "options": {
         "providerProps": {}
       },
       "hooks": {}
     },
     {
-      "location": "D:\\Firebase\\time-calc",
-      "nodeLocation": "D:\\Firebase\\time-calc\\node.api.js",
+      "location": "D:\\Firebase\\TimeCalc",
+      "nodeLocation": "D:\\Firebase\\TimeCalc\\node.api.js",
       "options": {},
       "hooks": {}
     }
   ],
   "paths": {
-    "ROOT": "D:\\Firebase\\time-calc",
-    "LOCAL_NODE_MODULES": "D:\\Firebase\\time-calc\\node_modules\\react-static\\node_modules",
-    "SRC": "D:\\Firebase\\time-calc\\src",
-    "PAGES": "D:\\Firebase\\time-calc\\src\\pages",
-    "DIST": "D:\\Firebase\\time-calc\\dist",
-    "ASSETS": "D:\\Firebase\\time-calc\\dist",
-    "PLUGINS": "D:\\Firebase\\time-calc\\plugins",
-    "TEMP": "D:\\Firebase\\time-calc\\tmp",
-    "BUILD_ARTIFACTS": "D:\\Firebase\\time-calc\\artifacts",
-    "PUBLIC": "D:\\Firebase\\time-calc\\public",
-    "NODE_MODULES": "D:\\Firebase\\time-calc\\node_modules",
-    "EXCLUDE_MODULES": "D:\\Firebase\\time-calc\\node_modules",
-    "PACKAGE": "D:\\Firebase\\time-calc\\package.json",
-    "HTML_TEMPLATE": "D:\\Firebase\\time-calc\\dist\\index.html",
-    "STATIC_DATA": "D:\\Firebase\\time-calc\\dist\\staticData"
+    "ROOT": "D:\\Firebase\\TimeCalc",
+    "LOCAL_NODE_MODULES": "D:\\Firebase\\TimeCalc\\node_modules\\react-static\\node_modules",
+    "SRC": "D:\\Firebase\\TimeCalc\\src",
+    "PAGES": "D:\\Firebase\\TimeCalc\\src\\pages",
+    "DIST": "D:\\Firebase\\TimeCalc\\dist",
+    "ASSETS": "D:\\Firebase\\TimeCalc\\dist",
+    "PLUGINS": "D:\\Firebase\\TimeCalc\\plugins",
+    "TEMP": "D:\\Firebase\\TimeCalc\\tmp",
+    "BUILD_ARTIFACTS": "D:\\Firebase\\TimeCalc\\artifacts",
+    "PUBLIC": "D:\\Firebase\\TimeCalc\\public",
+    "NODE_MODULES": "D:\\Firebase\\TimeCalc\\node_modules",
+    "EXCLUDE_MODULES": "D:\\Firebase\\TimeCalc\\node_modules",
+    "PACKAGE": "D:\\Firebase\\TimeCalc\\package.json",
+    "HTML_TEMPLATE": "D:\\Firebase\\TimeCalc\\dist\\index.html",
+    "STATIC_DATA": "D:\\Firebase\\TimeCalc\\dist\\staticData"
   },
   "babelExcludes": [],
   "siteRoot": "",

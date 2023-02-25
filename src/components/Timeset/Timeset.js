@@ -40,14 +40,19 @@ const styles = (theme) => ({
   },
 });
 
+const isAdmin = () => {
+  let user = JSON.parse(localStorage.getItem("user"));
+  console.log(user.uid);
+  if (user != null && user?.email == "admin@tsm.com") return true;
+};
 export const Timeset = ({ classes, time, onEditTime, toggleDialog, index }) => {
   const date = new Moment(time.date, "L").format("LL"); // TODO should be refactored out into time utils
 
   return (
     <TableRow className={classes.row}>
       {/*ToDo : Change emp name*/}
-      {localStorage.getItem("role") != "emp" ? (
-        <TableCell className={classes.important}>Yatesh</TableCell>
+      {isAdmin() ? (
+        <TableCell className={classes.important}>Himanshu</TableCell>
       ) : (
         <></>
       )}
@@ -61,11 +66,11 @@ export const Timeset = ({ classes, time, onEditTime, toggleDialog, index }) => {
       </TableCell>
       {/*ToDo : Change Status*/}
       <TableCell className={classes.important} align={"center"}>
-        Status
+        Pending
       </TableCell>
       {
         // ToDo : Handle roles
-        localStorage.getItem("role") != "emp" ? (
+        isAdmin() ? (
           <TableCell align={"left"}>
             <Button
               invoke={() => onEditTime({ index, time })}

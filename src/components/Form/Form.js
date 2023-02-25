@@ -10,6 +10,7 @@ import {
   save,
   resetCalculation,
 } from "../../connectors/redux/actions";
+import { Add } from "@material-ui/icons";
 
 import TimeField from "../TimeField/TimeField";
 import DateField from "../DateField/DateField";
@@ -34,8 +35,12 @@ const validate = (values, props) => {
     errors.duration = "No Start and End Time set";
   }
 
-  if (!Object.keys(errors).length) {
-    this.props.calculate(values);
+  if (this != null && !Object.keys(errors).length) {
+    values.type = this.state.type;
+    (values.username = JSON.parse(localStorage.getItem("user")).email),
+      (values.status = "Pending"),
+      console.log("Values", JSON.stringify(values));
+    this.props?.calculate(values);
   }
 
   return errors;
@@ -133,17 +138,8 @@ class Form extends Component {
                   invoke={() => null}
                   context={this.props}
                   type="submit"
-                  icon={this.props.edit ? "save" : "add"}
-                  label={this.props.edit ? "Save" : "Add"}
-                />
-              )}
-              {this.props.edit && (
-                <Button
-                  color="secondary"
-                  invoke={this.props.reset}
-                  context={props}
-                  icon="cancel"
-                  label="Cancel"
+                  icon={<Add />}
+                  label="add"
                 />
               )}
             </Grid>

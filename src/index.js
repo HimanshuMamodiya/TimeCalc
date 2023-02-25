@@ -7,8 +7,6 @@ if (process.env.NODE_ENV !== "production") {
   whyDidYouUpdate(React);
 }
 
-localStorage.setItem("role", "emp");
-
 // Your top level component
 import App from "./App";
 
